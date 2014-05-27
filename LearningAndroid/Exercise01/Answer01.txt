@@ -1,0 +1,258 @@
+
+—ûK–â‘è 1‚Ì‰ğ“š—á
+
+‚PjSystem.out.println()‚Ì‚İê‡
+for(int i=0;i<10;i++){
+    String    temp = "";
+    for(int j=0;j<i;j++){    
+        temp += " ";
+    }
+    System.out.println(temp+"ABCDEF");
+}
+
+‚QjSystem.out.print()‚ğg‚Á‚½ê‡
+for(int i=0;i<10;i++){
+    for(int j=0;j<i;j++){    
+        System.out.print(" ");
+    }
+    System.out.println("ABCDEF");
+}
+
+—ûK–â‘è 2‚Ì‰ğ“š—á
+
+for(int i=1;i<=100;i++){
+    if(i%15 == 0){
+        System.out.println("FizzBuzz");
+    }
+    else if(i%3 == 0){
+        System.out.println("Fizz");
+    }
+    else if(i%5 == 0){
+        System.out.println("Buzz");
+    }
+    else{
+        System.out.println(i);
+    }
+}
+
+—ûK–â‘è 3‚Ì‰ğ“š—á
+
+int    a = 100;
+int    b = 300;
+int    c = 50;
+
+if(a < b){
+    a = b;
+}
+if(a < c){
+    a = c;
+}
+System.out.println("Å‘å’l‚Í"+a);
+
+—ûK–â‘è 4‚Ì‰ğ“š—á
+
+???‰~‚Ì”ƒ‚¢•¨‚ğ‚µ‚Ä1–œ‰~D‚ğo‚µ‚½‚Æ‚«‚Ì
+‚¨’Ş‚è‚ÌD‚Æd‰İ‚Ì–‡”‚ğ‚à‚Æ‚ß‚éƒvƒƒOƒ‰ƒ€‚ğì¬‚µ‚Ä‚­‚¾‚³‚¢
+
+int    purchase = 2327;
+int    payment  = 10000;
+
+payment -= purchase;
+System.out.println("5000‰~D‚Í"+(payment/5000)+"–‡");
+payment %= 5000;
+System.out.println("1000‰~D‚Í"+(payment/1000)+"–‡");
+payment %= 1000;
+System.out.println("500‰~‹Ê‚Í"+(payment/500)+"–‡");
+payment %= 500;
+System.out.println("100‰~‹Ê‚Í"+(payment/100)+"–‡");
+payment %= 100;
+System.out.println("50‰~‹Ê‚Í"+(payment/50)+"–‡");
+payment %= 50;
+System.out.println("10‰~‹Ê‚Í"+(payment/10)+"–‡");
+payment %= 10;
+System.out.println("5‰~‹Ê‚Í"+(payment/5)+"–‡");
+payment %= 5;
+System.out.println("1‰~‹Ê‚Í"+payment+"–‡");
+
+—ûK–â‘è 5‚Ì‰ğ“š—á
+
+int    data=5;    // ’i”
+int    i,j;
+
+for(i=0;i<data;i++){
+    for(j=0;j<=i;j++){
+        System.out.print("*");
+    }
+    System.out.println("");
+}
+
+—ûK–â‘è 6‚Ì‰ğ“š—á
+
+int    n=4;    // ’i”
+int    i,j;
+
+// ƒsƒ‰ƒ~ƒbƒh•\¦
+for(i=0;i<n;i++){
+    for(j=0;j<=(n-i-1);j++){
+        System.out.print(" ");
+    }
+    for(j=0;j<(i*2+1);j++){
+        System.out.print("*");
+    }
+    System.out.println("");
+}
+
+—ûK–â‘è 7‚Ì‰ğ“š—á
+
+int    data = 3501;
+
+while(data > 0){
+    System.out.print(data%10);
+    data /= 10;
+}
+System.out.println("");
+
+—ûK–â‘è 8‚Ì‰ğ“š—á
+
+int    a = 1;
+int    b = 1;
+int    c = 0;
+int    i = 0;
+int    n = 6;    // ‘æn€
+
+for(i=2;i<n;i++){
+    c = a+b;
+    a = b;
+    b = c;
+}
+System.out.println(
+    "ƒtƒBƒ{ƒiƒbƒ`”—ñ‚Ì‘æ" + n + "€‚ÍA" + b);
+
+—ûK–â‘è 9‚Ì‰ğ“š—á
+
+public static int getDays(int year,int month)
+{
+    if(month == 2){
+        if(year%4==0 && year%100!=0 || year%400==0){
+            return 29;
+        }
+        return 28;
+    }
+    else if(month == 4 || month == 6
+     || month == 9 || month == 11){
+        return 30;
+    }
+    return 31;
+}
+
+—ûK–â‘è 10E11‚Ì‰ğ“š—á
+
+public class CoinCase {
+    private int    conin1 = 0;
+    private int    conin5 = 0;
+    private int    conin10 = 0;
+    private int    conin50 = 0;
+    private int    conin100 = 0;
+    private int    conin500 = 0;
+
+    public    void    AddCoins(int kind,int count){
+        switch(kind){
+        case 1:
+            conin1 += count;
+            break;
+        case 5:
+            conin5 += count;
+            break;
+        case 10:
+            conin10 += count;
+            break;
+        case 50:
+            conin50 += count;
+            break;
+        case 100:
+            conin100 += count;
+            break;
+        case 500:
+            conin500 += count;
+            break;
+        default:
+            break;
+        }
+    }
+    public int GetCount(int kind){
+        switch(kind){
+        case 1:
+            return conin1;
+        case 5:
+            return conin5;
+        case 10:
+            return conin10;
+        case 50:
+            return conin50;
+        case 100:
+            return conin100;
+        case 500:
+            return conin500;
+        default:
+            return 0;
+        }
+    }
+
+    public  int  GetCount(){
+        int total = 0;
+        total += GetCount(1);
+        total += GetCount(5);
+        total += GetCount(10);
+        total += GetCount(50);
+        total += GetCount(100);
+        total += GetCount(500);
+        return total;
+    }
+
+    public int GetAmount(int kind) {
+        return GetCount(kind)*kind;
+    }
+
+    public  int  GetAmount(){
+        int total = 0;
+        total += GetAmount(1);
+        total += GetAmount(5);
+        total += GetAmount(10);
+        total += GetAmount(50);
+        total += GetAmount(100);
+        total += GetAmount(500);
+        return total;
+    }
+}
+
+public static void main(String[] args) {
+
+    CoinCase coinCase = new CoinCase();
+
+    coinCase.AddCoins(1, 3);
+    coinCase.AddCoins(5, 4);
+    coinCase.AddCoins(10, 14);
+    coinCase.AddCoins(50, 3);
+    coinCase.AddCoins(100, 8);
+    coinCase.AddCoins(500, 2);
+    coinCase.AddCoins(50, 2);
+    coinCase.AddCoins(10, 3);
+    coinCase.AddCoins(5, 1);
+    coinCase.AddCoins(1, 2);
+
+    System.out.print("1‰~‹Ê‚ÍA"+coinCase.GetCount(1)+"–‡‚ÅA");
+    System.out.println(coinCase.GetAmount(1)+"‰~");
+    System.out.print("5‰~‹Ê‚ÍA"+coinCase.GetCount(5)+"–‡‚ÅA");
+    System.out.println(coinCase.GetAmount(5)+"‰~");
+    System.out.print("10‰~‹Ê‚ÍA"+coinCase.GetCount(10)+"–‡‚ÅA");
+    System.out.println(coinCase.GetAmount(10)+"‰~");
+    System.out.print("50‰~‹Ê‚ÍA"+coinCase.GetCount(50)+"–‡‚ÅA");
+    System.out.println(coinCase.GetAmount(50)+"‰~");
+    System.out.print("100‰~‹Ê‚ÍA"+coinCase.GetCount(100)+"–‡‚ÅA");
+    System.out.println(coinCase.GetAmount(100)+"‰~");
+    System.out.print("500‰~‹Ê‚ÍA"+coinCase.GetCount(500)+"–‡‚ÅA");
+    System.out.println(coinCase.GetAmount(500)+"‰~");
+    System.out.println("d‰İ‚Ì‘–‡”‚ÍA"+coinCase.GetCount()+"–‡");
+    System.out.println("‡Œv‹àŠz‚ÍA"+coinCase.GetAmount()+"‰~");
+}
+
