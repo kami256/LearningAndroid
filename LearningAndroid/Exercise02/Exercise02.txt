@@ -1,0 +1,25 @@
+
+課題２
+
+クイズを５問出し、ボタンで解答させて、
+最後に結果を表示するプログラムを作成してください。
+必要なUI部品
+・Buttonを２つ
+・TextViewを一つ
+具体的には、Buttonを２つ作成し、YesとNoに割り当てる。
+TextViewに問題文を表示。
+ボタンクリックで、正解を判断し、次の問題へ移る。
+５問終わったら、TextViewに結果を表示。(正解数/問題数)
+
+参考:
+（配列の使い方）
+String quiz[]={
+    "日本の首都は、東京。(Yes or No)",
+    "日本の人口は、１万ぐらい。(Yes or No)",
+    "京都は、北海道にある。(Yes or No)",
+    "壱岐は、九州にある。(Yes or No)",
+    "四国は、日本ではない。(Yes or No)"
+};
+for(int i=0;i<quiz.length;i++){
+    System.out.println(quiz[i]);
+}
