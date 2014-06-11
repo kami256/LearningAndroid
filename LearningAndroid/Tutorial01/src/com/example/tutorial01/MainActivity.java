@@ -23,8 +23,7 @@ package com.example.tutorial01;
 //		３－５）Handler.postDelayed()を使って、遅延処理を行っている
 //					TimerTaskより、使いやすい
 //					遅延後の処理でUI操作がそのまま、可能。Handlerであるため。
-//		３－６）synchronizedを使って、排他処理を行っている
-//
+//					全て、UIスレッドで処理されるため、排他は不要。
 /////////////////////////////////////////////////////////////////
 
 import java.util.Random;
@@ -65,8 +64,6 @@ public class MainActivity extends Activity {
 	private int mSuccessCount = 0;
     // 遅延処理用
 	private final Handler mHandler = new Handler();
-	// 排他処理用のオブジェクト
-    private Object mLock = new Object();
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +80,9 @@ public class MainActivity extends Activity {
 	// ボタンのリスナー
 	private OnClickListener mButtonListener = new OnClickListener() {
 		public void onClick(View v) {
-			// フィールド：secondIndexを排他処理するため
-			synchronized (mLock) {
-				if(mSecondIndex != -1){
-					return;
-				}
+			if(mSecondIndex != -1){
+				// ２枚目の処理中
+				return;
 			}
 			//　ボタンのIDを取得
 			int id = v.getId();
@@ -99,11 +94,8 @@ public class MainActivity extends Activity {
 						mCardState[i] = true;
 						// ２枚目か
 						if (mCurrentIndex != -1) {
-							// フィールド：secondIndexを排他処理するため
-							synchronized (mLock) {
-								// ２枚目の場所を覚える
-								mSecondIndex = i;
-							}
+							// ２枚目の場所を覚える
+							mSecondIndex = i;
 				            if (mImageSource[mCurrentIndex] == mImageSource[i]) {
 				            	// 一致
 				            	mHandler.postDelayed(mSuccessTask, 1000);
@@ -142,35 +134,31 @@ public class MainActivity extends Activity {
 	private final Runnable mSuccessTask = new Runnable() {
         @Override
         public void run() {
-			synchronized (mLock) {	// フィールド：secondIndexを排他処理するため
-				// カードをクリアにする処理
-				findViewById(sButonArray[mSecondIndex]).setBackgroundResource(0);        	
-				findViewById(sButonArray[mCurrentIndex]).setBackgroundResource(0);
-				if(mSuccessCount<7){
-					mSuccessCount++;
-				} else {
-					findViewById(R.id.LinearLayout1).setVisibility(View.VISIBLE);
-					Toast.makeText(getApplicationContext(), "成功！！！", Toast.LENGTH_LONG).show();
-				}
-				mCurrentIndex = -1;
-		       	mSecondIndex = -1;
+			// カードをクリアにする処理
+			findViewById(sButonArray[mSecondIndex]).setBackgroundResource(0);        	
+			findViewById(sButonArray[mCurrentIndex]).setBackgroundResource(0);
+			if(mSuccessCount<7){
+				mSuccessCount++;
+			} else {
+				findViewById(R.id.LinearLayout1).setVisibility(View.VISIBLE);
+				Toast.makeText(getApplicationContext(), "成功！！！", Toast.LENGTH_LONG).show();
 			}
-        }
+			mCurrentIndex = -1;
+	       	mSecondIndex = -1;
+		}
     };
 
 	// カードが不一致のときの遅延処理
 	private final Runnable mMismatchTask = new Runnable() {
         @Override
         public void run() {
-			synchronized (mLock) {// フィールド：secondIndexを排他処理するため
-				// カードを元に戻す処理
-				findViewById(sButonArray[mSecondIndex]).setBackgroundResource(R.drawable.station);
-				findViewById(sButonArray[mCurrentIndex]).setBackgroundResource(R.drawable.station);
-				mCardState[mCurrentIndex] = false;
-				mCardState[mSecondIndex] = false;
-	        	mCurrentIndex = -1;
-		       	mSecondIndex = -1;
-			}
-        }
+			// カードを元に戻す処理
+			findViewById(sButonArray[mSecondIndex]).setBackgroundResource(R.drawable.station);
+			findViewById(sButonArray[mCurrentIndex]).setBackgroundResource(R.drawable.station);
+			mCardState[mCurrentIndex] = false;
+			mCardState[mSecondIndex] = false;
+        	mCurrentIndex = -1;
+	       	mSecondIndex = -1;
+		}
     };
 }
